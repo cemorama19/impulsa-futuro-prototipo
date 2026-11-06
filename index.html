@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Impulsa Futuro - Orientación Académica y Laboral | Norte de Santander</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#f0f7ff',
+              100: '#e0effe',
+              500: '#0284c7',
+              600: '#0369a1',
+              700: '#075985',
+              800: '#0c4a6e',
+              900: '#082f49',
+            },
+            accent: {
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              orange: '#f97316'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+    .hero-gradient {
+      background: linear-gradient(135deg, #0c4a6e 0%, #0369a1 50%, #0284c7 100%);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+  <!-- TOP BAR NOTIFICATION -->
+  <div class="bg-amber-500 text-white text-xs font-medium py-1.5 px-4 text-center flex items-center justify-center gap-2 shadow-sm">
+    <span class="bg-white/20 px-2 py-0.5 rounded text-[11px] font-bold uppercase tracking-wider">Convocatoria Activa</span>
+    <span>Abiertas inscripciones para Becas Departamentales 2026-II y Matrícula Cero en Norte de Santander</span>
+    <button onclick="navigate('educacion')" class="underline hover:text-amber-100 font-semibold ml-2">Ver convocatorias &rarr;</button>
+  </div>
+
+  <!-- NAVIGATION BAR -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3 cursor-pointer" onclick="navigate('home')">
+        <div class="w-12 h-12 rounded-xl bg-gradient-to-tr from-sky-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-sky-500/20">
+          <i class="fa-solid fa-graduation-cap text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-2xl font-black tracking-tight text-slate-900 flex items-center gap-1.5">
+            Impulsa<span class="text-sky-600">Futuro</span>
+          </span>
+          <span class="text-[11px] font-semibold text-slate-400 block tracking-wide uppercase">Norte de Santander · TRL 4</span>
+        </div>
+      </div>
+
+      <!-- DESKTOP NAV -->
+      <nav class="hidden md:flex items-center gap-1 lg:gap-2">
+        <button onclick="navigate('home')" id="nav-home" class="nav-btn px-3 py-2 text-sm font-semibold rounded-lg text-sky-600 bg-sky-50 transition">
+          <i class="fa-solid fa-house mr-1.5"></i>Inicio
+        </button>
+        <button onclick="navigate('test')" id="nav-test" class="nav-btn px-3 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-sky-600 hover:bg-slate-100 transition">
+          <i class="fa-solid fa-compass mr-1.5"></i>Test Vocacional
+        </button>
+        <button onclick="navigate('educacion')" id="nav-educacion" class="nav-btn px-3 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-sky-600 hover:bg-slate-100 transition">
+          <i class="fa-solid fa-book-open-reader mr-1.5"></i>Educación y Becas
+        </button>
+        <button onclick="navigate('empleo')" id="nav-empleo" class="nav-btn px-3 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-sky-600 hover:bg-slate-100 transition">
+          <i class="fa-solid fa-briefcase mr-1.5"></i>Empleo Joven
+        </button>
+        <button onclick="navigate('mentorias')" id="nav-mentorias" class="nav-btn px-3 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-sky-600 hover:bg-slate-100 transition">
+          <i class="fa-solid fa-user-group mr-1.5"></i>Mentorías
+        </button>
+        <button onclick="navigate('dashboard')" id="nav-dashboard" class="nav-btn px-3 py-2 text-sm font-medium rounded-lg text-slate-600 hover:text-sky-600 hover:bg-slate-100 transition">
+          <i class="fa-solid fa-chart-pie mr-1.5"></i>Mi Panel
+        </button>
+      </nav>
+
+      <!-- AUTH ACTIONS -->
+      <div class="flex items-center gap-3">
+        <button onclick="openModal('modal-login')" class="hidden sm:inline-flex items-center text-sm font-semibold text-slate-700 hover:text-sky-600 px-3 py-2">
+          Iniciar Sesión
+        </button>
+        <button onclick="openModal('modal-register')" class="inline-flex items-center gap-2 bg-sky-600 hover:bg-sky-700 text-white text-sm font-bold px-4 py-2.5 rounded-xl shadow-md shadow-sky-600/25 transition">
+          <i class="fa-solid fa-user-plus text-xs"></i>
+          <span>Registrarme</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER WITH DYNAMIC VIEWS -->
+  <main class="flex-1">
+
+    <!-- VIEW 1: HOME / LANDING -->
+    <section id="view-home" class="view-panel block">
+      <!-- HERO SECTION -->
+      <div class="hero-gradient text-white relative overflow-hidden py-16 lg:py-24">
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            <div class="lg:col-span-7 space-y-6">
+              <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-4 py-1.5 text-xs font-semibold text-sky-200">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                Iniciativa de Impacto Territorial para Norte de Santander
+              </div>
+              <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.15]">
+                Construye tu futuro académico y laboral en tu región
+              </h1>
+              <p class="text-lg text-sky-100 font-normal leading-relaxed max-w-2xl">
+                Plataforma web unificada de orientación vocacional, catálogo de becas universitarias, ofertas de primer empleo formal y mentorías personalizadas para jóvenes de Cúcuta, Ocaña, Pamplona y todo Norte de Santander.
+              </p>
+              
+              <!-- SEARCH BOX -->
+              <div class="bg-white p-2 rounded-2xl shadow-2xl flex flex-col sm:flex-row gap-2 max-w-xl text-slate-800">
+                <div class="flex-1 flex items-center px-3 gap-2">
+                  <i class="fa-solid fa-magnifying-glass text-slate-400"></i>
+                  <input type="text" id="global-search-input" placeholder="¿Qué carrera, beca o empleo buscas?" class="w-full text-sm outline-none bg-transparent">
+                </div>
+                <div class="border-t sm:border-t-0 sm:border-l border-slate-200 flex items-center px-3">
+                  <select id="global-city-select" class="text-sm bg-transparent outline-none text-slate-600 font-medium py-1">
+                    <option value="">Todo el Departamento</option>
+                    <option value="cucuta">Cúcuta</option>
+                    <option value="ocana">Ocaña</option>
+                    <option value="pamplona">Pamplona</option>
+                    <option value="los-patios">Los Patios</option>
+                    <option value="villa-rosario">Villa del Rosario</option>
+                    <option value="tibu">Tibú (Catatumbo)</option>
+                  </select>
+                </div>
+                <button onclick="handleGlobalSearch()" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm px-6 py-3 rounded-xl transition flex items-center justify-center gap-2">
+                  <span>Explorar</span>
+                </button>
+              </div>
+
+              <!-- STATS -->
+              <div class="grid grid-cols-3 gap-4 pt-4 border-t border-white/15 max-w-lg">
+                <div>
+                  <div class="text-3xl font-extrabold text-white">+1,200</div>
+                  <div class="text-xs text-sky-200">Becas y programas</div>
+                </div>
+                <div>
+                  <div class="text-3xl font-extrabold text-white">450+</div>
+                  <div class="text-xs text-sky-200">Vacantes primer empleo</div>
+                </div>
+                <div>
+                  <div class="text-3xl font-extrabold text-white">100%</div>
+                  <div class="text-xs text-sky-200">Gratuito para jóvenes</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- HERO CARD / ILLUSTRATION -->
+            <div class="lg:col-span-5">
+              <div class="glass-card rounded-3xl p-6 sm:p-8 text-slate-800 shadow-2xl relative">
+                <div class="absolute -top-3 -right-3 bg-amber-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                  TRL 4 Validado
+                </div>
+                <div class="flex items-center gap-4 mb-6">
+                  <div class="w-14 h-14 rounded-2xl bg-sky-100 text-sky-600 flex items-center justify-center text-2xl font-bold">
+                    <i class="fa-solid fa-id-card-clip"></i>
+                  </div>
+                  <div>
+                    <h3 class="font-bold text-lg text-slate-900">Perfil Vocacional Rápido</h3>
+                    <p class="text-xs text-slate-500">Descubre en 5 minutos tus aptitudes profesionales</p>
+                  </div>
+                </div>
+
+                <div class="space-y-4">
+                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-700"><i class="fa-solid fa-code text-sky-600 mr-2"></i>Área de Tecnologías & Software</span>
+                    <span class="text-xs bg-emerald-100 text-emerald-700 font-bold px-2 py-0.5 rounded-full">92% Afinidad</span>
+                  </div>
+                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-700"><i class="fa-solid fa-chart-line text-indigo-600 mr-2"></i>Gestión y Emprendimiento</span>
+                    <span class="text-xs bg-sky-100 text-sky-700 font-bold px-2 py-0.5 rounded-full">84% Afinidad</span>
+                  </div>
+                  <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                    <span class="text-xs font-semibold text-slate-700"><i class="fa-solid fa-seedling text-emerald-600 mr-2"></i>Agroindustria & Sostenibilidad</span>
+                    <span class="text-xs bg-amber-100 text-amber-700 font-bold px-2 py-0.5 rounded-full">76% Afinidad</span>
+                  </div>
+                </div>
+
+                <div class="mt-6 pt-6 border-t border-slate-100">
+                  <button onclick="navigate('test')" class="w-full bg-slate-900 hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl text-sm transition flex items-center justify-center gap-2 shadow-lg">
+                    <span>Iniciar Test Vocacional Completo</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FEATURES GRID -->
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="text-center max-w-3xl mx-auto mb-12">
+          <span class="text-xs font-bold text-sky-600 tracking-wider uppercase bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
+            Ecosistema de Oportunidades
+          </span>
+          <h2 class="text-3xl font-black text-slate-900 mt-3">
+            Todo lo que necesitas para tu desarrollo en un solo lugar
+          </h2>
+          <p class="text-slate-600 text-sm mt-2">
+            Diseñado especialmente para la juventud de Norte de Santander, articulando universidades, el SENA y el tejido empresarial local.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <!-- CARD 1 -->
+          <div onclick="navigate('test')" class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-sky-300 hover:shadow-xl transition cursor-pointer group">
+            <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-compass"></i>
+            </div>
+            <h3 class="font-bold text-lg text-slate-900 group-hover:text-sky-600 transition">Test Vocacional Inteligente</h3>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Descubre tus fortalezas e intereses con nuestro algoritmo adaptado a la demanda laboral real del departamento.
+            </p>
+            <div class="mt-4 flex items-center text-xs font-bold text-sky-600">
+              <span>Hacer test</span> &rarr;
+            </div>
+          </div>
+
+          <!-- CARD 2 -->
+          <div onclick="navigate('educacion')" class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-sky-300 hover:shadow-xl transition cursor-pointer group">
+            <div class="w-12 h-12 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-graduation-cap"></i>
+            </div>
+            <h3 class="font-bold text-lg text-slate-900 group-hover:text-indigo-600 transition">Catálogo de Becas y Carreras</h3>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Accede a la oferta de la UNAD, UFPS, U. de Pamplona y convenios de Matrícula Cero con filtros claros.
+            </p>
+            <div class="mt-4 flex items-center text-xs font-bold text-indigo-600">
+              <span>Ver programas</span> &rarr;
+            </div>
+          </div>
+
+          <!-- CARD 3 -->
+          <div onclick="navigate('empleo')" class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-sky-300 hover:shadow-xl transition cursor-pointer group">
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-briefcase"></i>
+            </div>
+            <h3 class="font-bold text-lg text-slate-900 group-hover:text-emerald-600 transition">Primer Empleo & Prácticas</h3>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Ofertas verificadas en Cúcuta, Ocaña y municipios aledaños que no exigen experiencia previa excluyente.
+            </p>
+            <div class="mt-4 flex items-center text-xs font-bold text-emerald-600">
+              <span>Buscar ofertas</span> &rarr;
+            </div>
+          </div>
+
+          <!-- CARD 4 -->
+          <div onclick="navigate('mentorias')" class="bg-white rounded-2xl p-6 border border-slate-200 hover:border-sky-300 hover:shadow-xl transition cursor-pointer group">
+            <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <h3 class="font-bold text-lg text-slate-900 group-hover:text-amber-600 transition">Mentorías Profesionales</h3>
+            <p class="text-xs text-slate-500 mt-2 leading-relaxed">
+              Conéctate con profesionales de la región que te guiarán en tu hoja de vida y preparación para entrevistas.
+            </p>
+            <div class="mt-4 flex items-center text-xs font-bold text-amber-600">
+              <span>Agendar sesión</span> &rarr;
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 2: TEST VOCACIONAL -->
+    <section id="view-test" class="view-panel hidden py-12 bg-slate-50">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6">
+        <!-- HEADER -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm mb-8">
+          <div class="flex items-center gap-3 text-sky-600 font-bold text-sm mb-2">
+            <i class="fa-solid fa-compass"></i>
+            <span>MÓDULO DE ORIENTACIÓN VOCACIONAL INTELIGENTE</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-black text-slate-900">
+            Descubre tu Camino Profesional
+          </h2>
+          <p class="text-slate-600 text-sm mt-2">
+            Responde con sinceridad las siguientes preguntas para identificar tus áreas de mayor afinidad y recomendarte carreras y cursos disponibles en Norte de Santander.
+          </p>
+          <div class="w-full bg-slate-100 h-2.5 rounded-full mt-6 overflow-hidden">
+            <div id="test-progress-bar" class="bg-sky-600 h-full w-1/3 transition-all duration-300"></div>
+          </div>
+          <div class="flex justify-between text-xs text-slate-400 font-semibold mt-2">
+            <span id="test-step-label">Pregunta 1 de 6</span>
+            <span id="test-percentage-label">33% completado</span>
+          </div>
+        </div>
+
+        <!-- QUESTION CONTAINER -->
+        <div id="test-card" class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-md">
+          <div id="test-question-content">
+            <!-- DYNAMIC QUESTION CONTENT VIA JS -->
+          </div>
+
+          <div class="flex justify-between items-center mt-8 pt-6 border-t border-slate-100">
+            <button id="test-prev-btn" onclick="prevQuestion()" class="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-semibold text-sm hover:bg-slate-50 transition hidden">
+              &larr; Anterior
+            </button>
+            <button id="test-next-btn" onclick="nextQuestion()" class="ml-auto bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm px-6 py-2.5 rounded-xl transition shadow-md shadow-sky-600/20">
+              Siguiente &rarr;
+            </button>
+          </div>
+        </div>
+
+        <!-- TEST RESULT MODAL / CONTAINER -->
+        <div id="test-results" class="hidden bg-white rounded-2xl p-6 sm:p-8 border border-emerald-200 shadow-xl mt-8">
+          <div class="text-center max-w-lg mx-auto">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-3xl mx-auto mb-4">
+              <i class="fa-solid fa-circle-check"></i>
+            </div>
+            <h3 class="text-2xl font-black text-slate-900">¡Tu Perfil Vocacional está Listo!</h3>
+            <p class="text-sm text-slate-600 mt-1">
+              Basado en tus respuestas, tu perfil dominante es:
+            </p>
+            <div class="bg-sky-50 border border-sky-200 rounded-2xl p-4 my-6">
+              <span class="text-xs uppercase font-extrabold text-sky-700 tracking-wider">Perfil Recomendado</span>
+              <h4 id="result-profile-title" class="text-xl font-bold text-slate-900 mt-1">Ingeniería, Tecnología y Transformación Digital</h4>
+              <p class="text-xs text-slate-600 mt-2">
+                Posees alta capacidad para resolución lógica de problemas, pensamiento algorítmico y afinidad con sistemas computacionales.
+              </p>
+            </div>
+          </div>
+
+          <h4 class="font-bold text-slate-900 text-base mb-4">Programas y Becas sugeridos en la región:</h4>
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">
+              <i class="fa-solid fa-graduation-cap text-sky-600 text-xl mt-1"></i>
+              <div>
+                <h5 class="font-bold text-sm text-slate-900">Ingeniería de Sistemas - UNAD Cúcuta/Ocaña</h5>
+                <p class="text-xs text-slate-500 mt-1">Aplica con programa de Matrícula Cero 100% virtual.</p>
+                <button onclick="navigate('educacion')" class="text-xs font-bold text-sky-600 mt-2 block hover:underline">Ver detalles del programa &rarr;</button>
+              </div>
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-start gap-3">
+              <i class="fa-solid fa-laptop-code text-indigo-600 text-xl mt-1"></i>
+              <div>
+                <h5 class="font-bold text-sm text-slate-900">Tecnología en Desarrollo de Software - SENA</h5>
+                <p class="text-xs text-slate-500 mt-1">Sede Regional Cúcuta, formación técnica gratuita.</p>
+                <button onclick="navigate('educacion')" class="text-xs font-bold text-indigo-600 mt-2 block hover:underline">Ver requisitos &rarr;</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-6 flex justify-center gap-4">
+            <button onclick="restartTest()" class="text-xs font-bold text-slate-500 hover:text-slate-800">
+              <i class="fa-solid fa-rotate-left mr-1"></i>Repetir Test
+            </button>
+            <button onclick="navigate('dashboard')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl shadow">
+              Guardar en Mi Panel
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 3: EDUCACION Y BECAS -->
+    <section id="view-educacion" class="view-panel hidden py-12 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- HEADER -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-slate-200 gap-4">
+          <div>
+            <span class="text-xs font-bold text-sky-600 uppercase tracking-wider bg-sky-50 px-3 py-1 rounded-full border border-sky-100">
+              Oportunidades de Educación Superior y Técnica
+            </span>
+            <h2 class="text-3xl font-black text-slate-900 mt-2">
+              Catálogo de Becas y Programas en Norte de Santander
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Convenios vigentes con instituciones acreditadas, financiamiento público y beneficios especiales.
+            </p>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold text-slate-500">Filtrar por municipio:</span>
+            <select id="filter-city-edu" onchange="filterEducationCards()" class="text-sm font-semibold border border-slate-300 rounded-xl px-3 py-2 bg-white text-slate-700 outline-none">
+              <option value="all">Todos los municipios</option>
+              <option value="cucuta">Cúcuta</option>
+              <option value="ocana">Ocaña</option>
+              <option value="pamplona">Pamplona</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- CARDS GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="edu-cards-container">
+          <!-- CARD 1: UNAD -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col" data-city="all">
+            <div class="p-6 flex-1">
+              <div class="flex items-start justify-between">
+                <span class="bg-sky-100 text-sky-800 text-[11px] font-extrabold px-2.5 py-1 rounded-full">
+                  100% Virtual / A Distancia
+                </span>
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  Matrícula Cero
+                </span>
+              </div>
+              <h3 class="font-bold text-lg text-slate-900 mt-4 leading-snug">
+                Ingeniería de Sistemas - UNAD
+              </h3>
+              <p class="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                <i class="fa-solid fa-building-columns text-sky-600"></i>
+                UNAD (CEAD Cúcuta, UDR Ocaña, CCAV Pamplona)
+              </p>
+              <p class="text-xs text-slate-600 mt-3 line-clamp-3">
+                Programa acreditado en alta calidad con formación práctica en desarrollo de software, inteligencia artificial y gestión de proyectos tecnológicos.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">10 semestres</span>
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Snies: 101563</span>
+                <span class="text-[10px] bg-amber-50 text-amber-700 px-2 py-0.5 rounded font-bold">Subsidio MinEducación</span>
+              </div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700">Inscripciones abiertas</span>
+              <button onclick="openBecaModal('Ingeniería de Sistemas - UNAD', 'UNAD', '100% Cubierto por Matrícula Cero')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+                Postularme
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 2: UFPS -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col" data-city="cucuta">
+            <div class="p-6 flex-1">
+              <div class="flex items-start justify-between">
+                <span class="bg-indigo-100 text-indigo-800 text-[11px] font-extrabold px-2.5 py-1 rounded-full">
+                  Presencial
+                </span>
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  Matrícula Cero
+                </span>
+              </div>
+              <h3 class="font-bold text-lg text-slate-900 mt-4 leading-snug">
+                Ingeniería Electrónica - UFPS Cúcuta
+              </h3>
+              <p class="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                <i class="fa-solid fa-building-columns text-indigo-600"></i>
+                Univ. Francisco de Paula Santander (Sede Cúcuta)
+              </p>
+              <p class="text-xs text-slate-600 mt-3 line-clamp-3">
+                Énfasis en automatización industrial, robótica y telecomunicaciones aplicadas a las necesidades productivas de la frontera.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">10 semestres</span>
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Snies: 1042</span>
+                <span class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-bold">Laboratorios dotados</span>
+              </div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700">Cierre: 15 Nov</span>
+              <button onclick="openBecaModal('Ingeniería Electrónica - UFPS', 'UFPS Cúcuta', 'Aplica Matrícula Cero Estrato 1, 2 y 3')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+                Postularme
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 3: SENA -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col" data-city="all">
+            <div class="p-6 flex-1">
+              <div class="flex items-start justify-between">
+                <span class="bg-emerald-100 text-emerald-800 text-[11px] font-extrabold px-2.5 py-1 rounded-full">
+                  Tecnólogo Gratuito
+                </span>
+                <span class="text-xs font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded border border-indigo-200">
+                  Contrato de Aprendizaje
+                </span>
+              </div>
+              <h3 class="font-bold text-lg text-slate-900 mt-4 leading-snug">
+                Tecnología en Análisis y Desarrollo de Software - SENA
+              </h3>
+              <p class="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                <i class="fa-solid fa-building-columns text-emerald-600"></i>
+                SENA Regional Norte de Santander (Cúcuta / Ocaña)
+              </p>
+              <p class="text-xs text-slate-600 mt-3 line-clamp-3">
+                Programa de 27 meses con etapa lectiva y productiva remunerada en empresas de tecnología y servicios del departamento.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">27 meses</span>
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">100% Gratuito</span>
+                <span class="text-[10px] bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded font-bold">Apoyo de sostenimiento</span>
+              </div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700">Convocatoria Trimestral</span>
+              <button onclick="openBecaModal('Tecnología en ADSO - SENA', 'SENA Regional NDS', 'Gratuito + Contrato de Aprendizaje')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+                Postularme
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 4: BECA GOBERNACION -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col" data-city="all">
+            <div class="p-6 flex-1">
+              <div class="flex items-start justify-between">
+                <span class="bg-amber-100 text-amber-800 text-[11px] font-extrabold px-2.5 py-1 rounded-full">
+                  Beca Especial 100%
+                </span>
+                <span class="text-xs font-bold text-sky-600 bg-sky-50 px-2 py-0.5 rounded border border-sky-200">
+                  Gobernación NDS
+                </span>
+              </div>
+              <h3 class="font-bold text-lg text-slate-900 mt-4 leading-snug">
+                Beca Conectando Sueños - Jóvenes de Provincias
+              </h3>
+              <p class="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                <i class="fa-solid fa-award text-amber-500"></i>
+                Secretaría de Educación Departamental
+              </p>
+              <p class="text-xs text-slate-600 mt-3 line-clamp-3">
+                Subsidio integral de matrícula y sostenimiento para bachilleres de municipios no certificados de Norte de Santander (Ocaña, Pamplona, Catatumbo).
+              </p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Cobertura total</span>
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Sisbén A1 - C18</span>
+              </div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700">Cupos limitados</span>
+              <button onclick="openBecaModal('Beca Conectando Sueños', 'Gobernación de Norte de Santander', 'Matrícula + Subsidio de Transporte')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+                Postularme
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 5: U. PAMPLONA -->
+          <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-lg transition flex flex-col" data-city="pamplona">
+            <div class="p-6 flex-1">
+              <div class="flex items-start justify-between">
+                <span class="bg-purple-100 text-purple-800 text-[11px] font-extrabold px-2.5 py-1 rounded-full">
+                  Presencial / Distancia
+                </span>
+                <span class="text-xs font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                  Matrícula Cero
+                </span>
+              </div>
+              <h3 class="font-bold text-lg text-slate-900 mt-4 leading-snug">
+                Administración de Empresas - U. de Pamplona
+              </h3>
+              <p class="text-xs text-slate-500 mt-1 flex items-center gap-1">
+                <i class="fa-solid fa-building-columns text-purple-600"></i>
+                Universidad de Pamplona (Campus Principal)
+              </p>
+              <p class="text-xs text-slate-600 mt-3 line-clamp-3">
+                Orientada a la creación de empresas, desarrollo de la economía solidaria y dinamización comercial de la región fronteriza.
+              </p>
+              <div class="mt-4 flex flex-wrap gap-1.5">
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">9 semestres</span>
+                <span class="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-medium">Snies: 2315</span>
+              </div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-700">Abierta</span>
+              <button onclick="openBecaModal('Administración de Empresas', 'Universidad de Pamplona', 'Matrícula Cero Estrato 1-3')" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2 rounded-xl transition">
+                Postularme
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 4: EMPLEO JOVEN Y PRACTICAS -->
+    <section id="view-empleo" class="view-panel hidden py-12 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- HEADER -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 pb-6 border-b border-slate-200 gap-4">
+          <div>
+            <span class="text-xs font-bold text-emerald-600 uppercase tracking-wider bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+              Primer Empleo y Prácticas Formativas
+            </span>
+            <h2 class="text-3xl font-black text-slate-900 mt-2">
+              Vacantes Juveniles sin Barreras de Experiencia
+            </h2>
+            <p class="text-slate-600 text-sm mt-1">
+              Oportunidades laborales formales promovidas junto a la Cámara de Comercio de Cúcuta y empresas de la región.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <input type="text" id="job-search-input" onkeyup="filterJobs()" placeholder="Buscar cargo o habilidad..." class="text-sm border border-slate-300 rounded-xl px-3 py-2 bg-white text-slate-700 outline-none w-48 sm:w-64">
+          </div>
+        </div>
+
+        <!-- JOB LISTINGS -->
+        <div class="space-y-4" id="job-listings-container">
+          <!-- JOB 1 -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-emerald-300 hover:shadow-md transition flex flex-col md:flex-row md:items-center justify-between gap-4 job-item" data-title="Desarrollador Junior Frontend">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-sky-100 text-sky-600 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-code"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-bold text-base text-slate-900">Desarrollador Junior Web / Frontend</h3>
+                  <span class="bg-emerald-100 text-emerald-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full">Sin experiencia</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1 flex items-center gap-3">
+                  <span><i class="fa-solid fa-building text-slate-400 mr-1"></i>FronteraTech Solutions</span>
+                  <span><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>Cúcuta (Híbrido)</span>
+                  <span><i class="fa-solid fa-money-bill text-slate-400 mr-1"></i>$1.800.000 + Prestaciones</span>
+                </p>
+                <p class="text-xs text-slate-600 mt-2">
+                  Conocimientos en HTML, CSS, JavaScript y React. Se valoran proyectos personales o académicos desarrollados durante los estudios.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 self-end md:self-center">
+              <button onclick="openJobApplyModal('Desarrollador Junior Web', 'FronteraTech Solutions')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">
+                Postularme
+              </button>
+            </div>
+          </div>
+
+          <!-- JOB 2 -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-emerald-300 hover:shadow-md transition flex flex-col md:flex-row md:items-center justify-between gap-4 job-item" data-title="Auxiliar Administrativo y Logística">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-boxes-packing"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-bold text-base text-slate-900">Auxiliar Administrativo y de Inventarios</h3>
+                  <span class="bg-emerald-100 text-emerald-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full">Primer Empleo</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1 flex items-center gap-3">
+                  <span><i class="fa-solid fa-building text-slate-400 mr-1"></i>Cerámica Norte SAS</span>
+                  <span><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>Cúcuta - El Zulia</span>
+                  <span><i class="fa-solid fa-money-bill text-slate-400 mr-1"></i>SMLV + Auxilio de Transporte</span>
+                </p>
+                <p class="text-xs text-slate-600 mt-2">
+                  Apoyo en registro de compras, control de mercancía y facturación básica. Dirigido a técnicos o tecnólogos recién graduados.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 self-end md:self-center">
+              <button onclick="openJobApplyModal('Auxiliar Administrativo', 'Cerámica Norte SAS')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">
+                Postularme
+              </button>
+            </div>
+          </div>
+
+          <!-- JOB 3 -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm hover:border-emerald-300 hover:shadow-md transition flex flex-col md:flex-row md:items-center justify-between gap-4 job-item" data-title="Practicante de Sistemas y Soporte TI">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-headset"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="font-bold text-base text-slate-900">Practicante Universitario en Soporte TI</h3>
+                  <span class="bg-sky-100 text-sky-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full">Práctica Profesional</span>
+                </div>
+                <p class="text-xs text-slate-500 mt-1 flex items-center gap-3">
+                  <span><i class="fa-solid fa-building text-slate-400 mr-1"></i>Hospital Regional Emiro Quintero Cañizares</span>
+                  <span><i class="fa-solid fa-location-dot text-slate-400 mr-1"></i>Ocaña, NDS</span>
+                  <span><i class="fa-solid fa-money-bill text-slate-400 mr-1"></i>Auxilio de Práctica (100% SMLV)</span>
+                </p>
+                <p class="text-xs text-slate-600 mt-2">
+                  Mantenimiento preventivo, soporte a usuarios y administración de redes locales en la institución hospitalaria.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-3 self-end md:self-center">
+              <button onclick="openJobApplyModal('Practicante Universitario TI', 'Hospital Emiro Quintero Cañizares - Ocaña')" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-2.5 rounded-xl transition shadow">
+                Postularme
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 5: MENTORIAS -->
+    <section id="view-mentorias" class="view-panel hidden py-12 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl mb-8">
+          <span class="text-xs font-bold text-amber-600 uppercase tracking-wider bg-amber-50 px-3 py-1 rounded-full border border-amber-100">
+            Acompañamiento Personalizado 1 a 1
+          </span>
+          <h2 class="text-3xl font-black text-slate-900 mt-2">
+            Red de Mentores de Norte de Santander
+          </h2>
+          <p class="text-slate-600 text-sm mt-1">
+            Profesionales y egresados destacados donan su tiempo para orientarte, revisar tu hoja de vida y prepararte para entrevistas laborales.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <!-- MENTOR 1 -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm text-center flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-sky-400 to-blue-600 text-white flex items-center justify-center text-3xl font-bold mb-4 shadow-md">
+              <i class="fa-solid fa-user-tie"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900">Ing. Carlos Andrés Vera</h3>
+            <p class="text-xs text-sky-600 font-semibold">Líder Técnico de Software @ TechHub Cúcuta</p>
+            <p class="text-xs text-slate-500 mt-3 leading-relaxed">
+              Egresado UNAD. Especialista en arquitectura de software y orientación para inserción en la industria de la tecnología.
+            </p>
+            <div class="mt-4 flex items-center gap-1 text-amber-400 text-xs">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <span class="text-slate-500 font-bold ml-1">5.0 (24 mentorías)</span>
+            </div>
+            <button onclick="openMentorModal('Ing. Carlos Andrés Vera', 'Ingeniería de Software y Empleabilidad TI')" class="mt-6 w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
+              Agendar Asesoría Gratuita
+            </button>
+          </div>
+
+          <!-- MENTOR 2 -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm text-center flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-rose-400 to-red-600 text-white flex items-center justify-center text-3xl font-bold mb-4 shadow-md">
+              <i class="fa-solid fa-user-graduate"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900">Dra. Claudia Marcela Peña</h3>
+            <p class="text-xs text-rose-600 font-semibold">Psicóloga Organizacional y Consultora de Talento</p>
+            <p class="text-xs text-slate-500 mt-3 leading-relaxed">
+              Asesora a jóvenes en estructuración de perfil profesional, hojas de vida de alto impacto y pruebas psicotécnicas.
+            </p>
+            <div class="mt-4 flex items-center gap-1 text-amber-400 text-xs">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star-half-stroke"></i>
+              <span class="text-slate-500 font-bold ml-1">4.9 (38 mentorías)</span>
+            </div>
+            <button onclick="openMentorModal('Dra. Claudia Marcela Peña', 'Hoja de Vida y Simulacro de Entrevista')" class="mt-6 w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
+              Agendar Asesoría Gratuita
+            </button>
+          </div>
+
+          <!-- MENTOR 3 -->
+          <div class="bg-white rounded-2xl p-6 border border-slate-200 shadow-sm text-center flex flex-col items-center">
+            <div class="w-20 h-20 rounded-full bg-gradient-to-tr from-emerald-400 to-teal-600 text-white flex items-center justify-center text-3xl font-bold mb-4 shadow-md">
+              <i class="fa-solid fa-lightbulb"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900">Mg. Jairo Rincón Sánchez</h3>
+            <p class="text-xs text-emerald-600 font-semibold">Director de Emprendimiento Ocaña</p>
+            <p class="text-xs text-slate-500 mt-3 leading-relaxed">
+              Experto en financiamiento con Fondo Emprender, formulación de proyectos productivos y becas en el Catatumbo.
+            </p>
+            <div class="mt-4 flex items-center gap-1 text-amber-400 text-xs">
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i>
+              <span class="text-slate-500 font-bold ml-1">5.0 (19 mentorías)</span>
+            </div>
+            <button onclick="openMentorModal('Mg. Jairo Rincón Sánchez', 'Emprendimiento y Becas Especiales')" class="mt-6 w-full bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs py-2.5 rounded-xl transition">
+              Agendar Asesoría Gratuita
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: MI PANEL / DASHBOARD -->
+    <section id="view-dashboard" class="view-panel hidden py-12 bg-slate-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <!-- USER WELCOME BANNER -->
+        <div class="bg-gradient-to-r from-slate-900 via-sky-950 to-slate-900 text-white rounded-3xl p-6 sm:p-8 mb-8 shadow-xl relative overflow-hidden">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 relative z-10">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 rounded-2xl bg-sky-500/20 border border-sky-400/30 flex items-center justify-center text-2xl font-black text-sky-300">
+                CM
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h2 class="text-xl sm:text-2xl font-bold">Cristian Mora Manrique</h2>
+                  <span class="bg-sky-500/30 text-sky-200 border border-sky-400/30 text-[10px] font-bold px-2 py-0.5 rounded-full">Estudiante Activo</span>
+                </div>
+                <p class="text-xs text-slate-300 mt-1">Ocaña, Norte de Santander · Perfil verificado con SISBÉN A3</p>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="openModal('modal-edit-profile')" class="bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-bold px-4 py-2 rounded-xl transition">
+                <i class="fa-solid fa-pen-to-square mr-1.5"></i>Editar Perfil
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- DASHBOARD STATS -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Test Vocacional</div>
+            <div class="text-2xl font-black text-slate-900 mt-1">Completado</div>
+            <div class="text-xs text-sky-600 font-bold mt-1">Ing. & Software (92%)</div>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Postulaciones a Becas</div>
+            <div class="text-2xl font-black text-slate-900 mt-1">2 Activas</div>
+            <div class="text-xs text-amber-600 font-bold mt-1">En revisión institucional</div>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Vacantes Aplicadas</div>
+            <div class="text-2xl font-black text-slate-900 mt-1">1 Enviada</div>
+            <div class="text-xs text-emerald-600 font-bold mt-1">FronteraTech Solutions</div>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="text-xs text-slate-400 font-semibold uppercase tracking-wider">Mentorías Agendadas</div>
+            <div class="text-2xl font-black text-slate-900 mt-1">1 Próxima</div>
+            <div class="text-xs text-indigo-600 font-bold mt-1">Jueves 4:00 PM con Ing. Vera</div>
+          </div>
+        </div>
+
+        <!-- TRACKING TABLE -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 text-base">Mis Solicitudes y Convocatorias</h3>
+            <span class="text-xs text-slate-400">Actualizado hoy</span>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse">
+              <thead>
+                <tr class="bg-slate-50 text-[11px] font-bold text-slate-500 uppercase tracking-wider border-b border-slate-100">
+                  <th class="py-3 px-6">Tipo</th>
+                  <th class="py-3 px-6">Programa / Oferta</th>
+                  <th class="py-3 px-6">Entidad</th>
+                  <th class="py-3 px-6">Fecha Registro</th>
+                  <th class="py-3 px-6">Estado</th>
+                  <th class="py-3 px-6">Acción</th>
+                </tr>
+              </thead>
+              <tbody class="text-xs divide-y divide-slate-100 text-slate-700">
+                <tr>
+                  <td class="py-4 px-6 font-semibold"><span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded text-[10px]">Beca</span></td>
+                  <td class="py-4 px-6 font-bold text-slate-900">Ingeniería de Sistemas (Matrícula Cero)</td>
+                  <td class="py-4 px-6">UNAD CEAD Cúcuta</td>
+                  <td class="py-4 px-6">28/10/2026</td>
+                  <td class="py-4 px-6"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded font-bold">Documentos en Verificación</span></td>
+                  <td class="py-4 px-6"><button class="text-sky-600 font-bold hover:underline">Ver soporte</button></td>
+                </tr>
+                <tr>
+                  <td class="py-4 px-6 font-semibold"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px]">Empleo</span></td>
+                  <td class="py-4 px-6 font-bold text-slate-900">Desarrollador Junior Web</td>
+                  <td class="py-4 px-6">FronteraTech Solutions</td>
+                  <td class="py-4 px-6">30/10/2026</td>
+                  <td class="py-4 px-6"><span class="bg-sky-100 text-sky-800 px-2 py-0.5 rounded font-bold">Hoja de Vida Enviada</span></td>
+                  <td class="py-4 px-6"><button class="text-sky-600 font-bold hover:underline">Detalle</button></td>
+                </tr>
+                <tr>
+                  <td class="py-4 px-6 font-semibold"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-[10px]">Mentoría</span></td>
+                  <td class="py-4 px-6 font-bold text-slate-900">Asesoría en Perfil Profesional TI</td>
+                  <td class="py-4 px-6">Ing. Carlos Andrés Vera</td>
+                  <td class="py-4 px-6">31/10/2026</td>
+                  <td class="py-4 px-6"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">Confirmada (Teams)</span></td>
+                  <td class="py-4 px-6"><button class="text-sky-600 font-bold hover:underline">Unirse al link</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- MODALS -->
+  <!-- MODAL: LOGIN -->
+  <div id="modal-login" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closeModal('modal-login')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-3">
+          <i class="fa-solid fa-arrow-right-to-bracket"></i>
+        </div>
+        <h3 class="text-xl font-black text-slate-900">Iniciar Sesión</h3>
+        <p class="text-xs text-slate-500 mt-1">Ingresa a tu cuenta de Impulsa Futuro</p>
+      </div>
+      <form onsubmit="handleLogin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Correo Electrónico</label>
+          <input type="email" required placeholder="tu_correo@ejemplo.com" class="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2.5 outline-none focus:border-sky-500">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Contraseña</label>
+          <input type="password" required placeholder="••••••••" class="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2.5 outline-none focus:border-sky-500">
+        </div>
+        <button type="submit" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-sm py-3 rounded-xl transition shadow">
+          Ingresar a la plataforma
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: REGISTER -->
+  <div id="modal-register" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl relative max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal('modal-register')" class="absolute top-5 right-5 text-slate-400 hover:text-slate-600 text-lg">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-xl mx-auto mb-3">
+          <i class="fa-solid fa-user-plus"></i>
+        </div>
+        <h3 class="text-xl font-black text-slate-900">Registro de Jóvenes</h3>
+        <p class="text-xs text-slate-500 mt-1">Accede gratis a becas, cursos y empleo en Norte de Santander</p>
+      </div>
+      <form onsubmit="handleRegister(event)" class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nombres y Apellidos</label>
+            <input type="text" required placeholder="Ej: Camilo Andrés Pérez" class="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Documento de Identidad</label>
+            <input type="text" required placeholder="C.C. o T.I." class="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2 outline-none">
+          </div>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Municipio de Residencia</label>
+            <select required class="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2 outline-none bg-white">
+              <option value="">Seleccionar municipio</option>
+              <option value="cucuta">Cúcuta</option>
+              <option value="ocana">Ocaña</option>
+              <option value="pamplona">Pamplona</option>
+              <option value="los-patios">Los Patios</option>
+              <option value="villa-rosario">Villa del Rosario</option>
+              <option value="tibu">Tibú</option>
+              <option value="chinacota">Chinácota</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-700 mb-1">Nivel Educativo Actual</label>
+            <select required class="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2 outline-none bg-white">
+              <option value="bachiller">Bachiller Graduado</option>
+              <option value="estudiante-11">Estudiante Grado 11</option>
+              <option value="tecnico">Técnico / Tecnólogo</option>
+              <option value="universitario">Universitario en curso</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Correo Electrónico</label>
+          <input type="email" required placeholder="ejemplo@correo.com" class="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2 outline-none">
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-slate-700 mb-1">Crear Contraseña</label>
+          <input type="password" required placeholder="Mínimo 6 caracteres" class="w-full text-sm border border-slate-300 rounded-xl px-3.5 py-2 outline-none">
+        </div>
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm py-3 rounded-xl transition shadow">
+          Completar Registro Gratuito
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL: APPLICATION SUCCESS -->
+  <div id="modal-success" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-white rounded-3xl max-w-sm w-full p-6 text-center shadow-2xl">
+      <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl mx-auto mb-3">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <h3 class="text-lg font-black text-slate-900" id="success-title">¡Postulación Registrada!</h3>
+      <p class="text-xs text-slate-600 mt-2" id="success-message">
+        Tu solicitud ha sido enviada exitosamente. Podrás hacer seguimiento al avance en Mi Panel.
+      </p>
+      <button onclick="closeModal('modal-success'); navigate('dashboard')" class="mt-5 w-full bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs py-2.5 rounded-xl transition">
+        Ir a Mi Panel de Seguimiento
+      </button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 py-10 border-t border-slate-800 mt-auto">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div>
+        <div class="text-white font-black text-lg">Impulsa<span class="text-sky-400">Futuro</span></div>
+        <p class="text-xs text-slate-500 mt-1">Proyecto de Ingeniería II · Código 202337121 · Grupo 81 · UNAD</p>
+        <p class="text-[11px] text-slate-500">Diseñado para la validación TRL 4 en entorno de laboratorio simulado.</p>
+      </div>
+      <div class="flex items-center gap-6 text-xs text-slate-400">
+        <span>Cúcuta · Ocaña · Pamplona</span>
+        <span>Rafael Hernando Losada (Docente)</span>
+        <span class="text-sky-400 font-bold">Fase 4 - 2026</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- SCRIPT LOGIC -->
+  <script>
+    // NAVIGATION CONTROLLER
+    function navigate(viewId) {
+      document.querySelectorAll('.view-panel').forEach(el => el.classList.add('hidden'));
+      const activeView = document.getElementById('view-' + viewId);
+      if (activeView) activeView.classList.remove('hidden');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('text-sky-600', 'bg-sky-50');
+        btn.classList.add('text-slate-600');
+      });
+      const activeBtn = document.getElementById('nav-' + viewId);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-600');
+        activeBtn.classList.add('text-sky-600', 'bg-sky-50');
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    // MODAL CONTROLLER
+    function openModal(id) {
+      document.getElementById(id).classList.remove('hidden');
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.add('hidden');
+    }
+
+    // TEST VOCACIONAL LOGIC
+    const questions = [
+      {
+        text: "¿Qué actividad disfrutas más realizar en tu tiempo libre o proyectos escolares?",
+        options: [
+          { label: "Crear páginas web, programar o desarmar equipos electrónicos", profile: "tech" },
+          { label: "Organizar eventos, liderar equipos o diseñar planes de negocio", profile: "business" },
+          { label: "Trabajar en proyectos ambientales, cultivos o cuidado del entorno", profile: "agro" },
+          { label: "Ayudar a personas de mi comunidad a resolver problemas de salud o bienestar", profile: "social" }
+        ]
+      },
+      {
+        text: "Cuando te enfrentas a un desafío complejo, ¿cuál es tu forma preferida de abordarlo?",
+        options: [
+          { label: "Analizar datos, buscar patrones lógicos y escribir algoritmos", profile: "tech" },
+          { label: "Negociar con otros, coordinar tareas y administrar presupuestos", profile: "business" },
+          { label: "Aplicar soluciones prácticas en el campo con recursos sostenibles", profile: "agro" },
+          { label: "Escuchar a los afectados y construir acuerdos colaborativos", profile: "social" }
+        ]
+      },
+      {
+        text: "¿En qué tipo de empresa u organización de Norte de Santander te gustaría desempeñarte?",
+        options: [
+          { label: "Una empresa de software, fintech o centro de desarrollo tecnológico", profile: "tech" },
+          { label: "Cámara de Comercio, gremio comercial o creando mi propia empresa", profile: "business" },
+          { label: "Cooperativa agropecuaria, laboratorio biológico o finca tecnificada", profile: "agro" },
+          { label: "Hospitales, colegios, fundaciones o secretarías de desarrollo social", profile: "social" }
+        ]
+      }
+    ];
+
+    let currentQ = 0;
+    let scores = { tech: 0, business: 0, agro: 0, social: 0 };
+
+    function renderQuestion() {
+      const q = questions[currentQ];
+      const container = document.getElementById('test-question-content');
+      document.getElementById('test-step-label').innerText = `Pregunta ${currentQ + 1} de ${questions.length}`;
+      const pct = Math.round(((currentQ + 1) / questions.length) * 100);
+      document.getElementById('test-progress-bar').style.width = pct + '%';
+      document.getElementById('test-percentage-label').innerText = pct + '% completado';
+
+      let html = `<h3 class="text-lg font-bold text-slate-900 mb-4">${q.text}</h3><div class="space-y-3">`;
+      q.options.forEach((opt, idx) => {
+        html += `
+          <label class="flex items-center gap-3 p-4 rounded-xl border border-slate-200 hover:border-sky-400 hover:bg-sky-50/50 cursor-pointer transition">
+            <input type="radio" name="opt" value="${opt.profile}" class="w-4 h-4 text-sky-600 focus:ring-sky-500" ${idx === 0 ? 'checked' : ''}>
+            <span class="text-sm text-slate-800 font-medium">${opt.label}</span>
+          </label>
+        `;
+      });
+      html += `</div>`;
+      container.innerHTML = html;
+
+      document.getElementById('test-prev-btn').classList.toggle('hidden', currentQ === 0);
+      document.getElementById('test-next-btn').innerText = (currentQ === questions.length - 1) ? 'Ver Resultados' : 'Siguiente \u2192';
+    }
+
+    function nextQuestion() {
+      const selected = document.querySelector('input[name="opt"]:checked');
+      if (selected) {
+        scores[selected.value] = (scores[selected.value] || 0) + 1;
+      }
+      if (currentQ < questions.length - 1) {
+        currentQ++;
+        renderQuestion();
+      } else {
+        showResults();
+      }
+    }
+
+    function prevQuestion() {
+      if (currentQ > 0) {
+        currentQ--;
+        renderQuestion();
+      }
+    }
+
+    function showResults() {
+      document.getElementById('test-card').classList.add('hidden');
+      document.getElementById('test-results').classList.remove('hidden');
+    }
+
+    function restartTest() {
+      currentQ = 0;
+      scores = { tech: 0, business: 0, agro: 0, social: 0 };
+      document.getElementById('test-results').classList.add('hidden');
+      document.getElementById('test-card').classList.remove('hidden');
+      renderQuestion();
+    }
+
+    // BECA / JOB APPLICATION MODALS
+    function openBecaModal(title, institution, benefit) {
+      document.getElementById('success-title').innerText = "¡Postulación a Beca Enviada!";
+      document.getElementById('success-message').innerText = `Tu preinscripción para ${title} en ${institution} (${benefit}) ha sido radicada.`;
+      openModal('modal-success');
+    }
+
+    function openJobApplyModal(role, company) {
+      document.getElementById('success-title').innerText = "¡Postulación a Vacante Exitosa!";
+      document.getElementById('success-message').innerText = `Has aplicado al cargo ${role} en ${company}. La empresa revisará tu perfil en las próximas 48 horas.`;
+      openModal('modal-success');
+    }
+
+    function openMentorModal(mentor, topic) {
+      document.getElementById('success-title').innerText = "¡Sesión de Mentoría Agendada!";
+      document.getElementById('success-message').innerText = `Tu cita virtual con ${mentor} sobre ${topic} quedó reservada en el calendario.`;
+      openModal('modal-success');
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      closeModal('modal-login');
+      navigate('dashboard');
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      closeModal('modal-register');
+      document.getElementById('success-title').innerText = "¡Bienvenido a Impulsa Futuro!";
+      document.getElementById('success-message').innerText = "Tu cuenta ha sido creada exitosamente. Te hemos asignado tu tablero de estudiante.";
+      openModal('modal-success');
+    }
+
+    function handleGlobalSearch() {
+      const q = document.getElementById('global-search-input').value.toLowerCase();
+      if (q.includes('empleo') || q.includes('trabajo') || q.includes('junior')) {
+        navigate('empleo');
+      } else {
+        navigate('educacion');
+      }
+    }
+
+    function filterEducationCards() {
+      const val = document.getElementById('filter-city-edu').value;
+      const cards = document.querySelectorAll('#edu-cards-container > div');
+      cards.forEach(card => {
+        const city = card.getAttribute('data-city');
+        if (val === 'all' || city === 'all' || city === val) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    }
+
+    function filterJobs() {
+      const q = document.getElementById('job-search-input').value.toLowerCase();
+      const items = document.querySelectorAll('.job-item');
+      items.forEach(item => {
+        const title = item.getAttribute('data-title').toLowerCase();
+        if (title.includes(q)) {
+          item.classList.remove('hidden');
+        } else {
+          item.classList.add('hidden');
+        }
+      });
+    }
+
+    // INIT & URL PARAM HANDLER
+    window.addEventListener('DOMContentLoaded', () => {
+      renderQuestion();
+      const hash = window.location.hash.replace('#', '');
+      const params = new URLSearchParams(window.location.search);
+      const view = params.get('view') || hash;
+      if (view) {
+        navigate(view);
+      }
+      if (params.get('modal')) {
+        openModal(params.get('modal'));
+      }
+      if (params.get('testResult') === 'true') {
+        navigate('test');
+        showResults();
+      }
+    });
+  </script>
+</body>
+</html>
